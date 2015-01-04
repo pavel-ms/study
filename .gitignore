@@ -1,6 +1,13 @@
-assets/*
-!assets/.gitignore
-protected/runtime/*
-!protected/runtime/.gitignore
-protected/data/*.db
-themes/classic/views/
+# ide project files
+.idea
+
+# frontend static files
+static/
+frontend/node_modules
+frontend/bower_components
+frontend/build
+web/views/blocks/_staticCssInclude.html
+web/views/blocks/_staticJsInclude.html
+
+# db file
+db.sqlite3

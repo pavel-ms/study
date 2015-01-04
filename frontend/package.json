@@ -1,0 +1,22 @@
+{
+  "name": "universety-dj-project",
+  "version": "0.0.1",
+  "description": "",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "Pavel Mikushin <pavelmics@gmail.com>",
+  "license": "ISC"
+
+  , "devDependencies": {
+        "grunt": "~0.4.5",
+        "grunt-contrib-concat": "0.5.0",
+        "grunt-contrib-jshint": "~0.10.0",
+        "grunt-contrib-nodeunit": "~0.4.1",
+        "grunt-contrib-uglify": "~0.5.0",
+        "grunt-replace": "*",
+        "grunt-contrib-less": "*",
+        "grunt-contrib-clean": "*"
+    }
+}
