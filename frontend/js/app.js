@@ -1,5 +1,9 @@
 
-_initApp = function() {
+/**
+ * Инициализируем приложение только тогда,
+ * когда DOM готов
+ */
+$(function() {
 
     /**
      * Очень простой объект приложения
@@ -34,6 +38,13 @@ _initApp = function() {
              } else {
                  throw new Error('This module is not registered!', 1);
              }
+        },
+
+        /**
+         * Перезагружаем страницу
+         */
+        reload: function() {
+            window.location.reload();
         }
     };
     window.App = new _App();
@@ -60,10 +71,18 @@ _initApp = function() {
             return dfr.promise();
         };
 
+        /**
+         * Показываем прогресс бар
+         * @private
+         */
         var _showProgressBar = function() {
             $('.js-fetch-avto-progress-bar').removeClass('app-invisible');
         };
 
+        /**
+         * Скрываем прогресс бар
+         * @private
+         */
         var _hideProgressBar = function() {
             var $el = $('.js-fetch-avto-progress-bar');
             $el.addClass('app-invisible');
@@ -77,6 +96,9 @@ _initApp = function() {
                     _runDataFetch()
                         .then(function() {
                             _hideProgressBar();
+                            app.reload();
+                        }, function() {
+                            _hideProgressBar();
                         })
                 });
             }
@@ -85,6 +107,4 @@ _initApp = function() {
     })(window, $, _);
 
 
-};
-
-$(function() { _initApp(); });
+});

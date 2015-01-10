@@ -77,7 +77,8 @@ class Parser:
             })
             res = http.fetch(request)
             data = self.handle_response(res.body.decode('utf-8'), l)
-            models.append(self.create_model(data))
+            if data:
+                models.append(self.create_model(data))
         return models
 
     def handle_response(self, html, link):
@@ -88,19 +89,22 @@ class Parser:
         soup = BeautifulSoup(html)
         # with open('test.html', 'w') as f:
         #     f.write(str(soup.prettify()))
-        data = {}
+        try:
+            data = {}
 
-        data['external_id'] = self._helper.fetch_ext_id(link)
+            data['external_id'] = self._helper.fetch_ext_id(link)
 
-        title = soup.select('title')[0].getText()
-        data['model'] = self._helper.extract_model_from_title(title)
+            title = soup.select('title')[0].getText()
+            data['model'] = self._helper.extract_model_from_title(title)
 
-        data['cover'] = soup.select('.b-fotorama-photo-img')[0].attrs['src']
+            data['cover'] = soup.select('.b-fotorama-photo-img')[0].attrs['src']
 
-        price = soup.select('span[itemprop=price]')[0].getText()
-        data['price'] = self._helper.extract_int(price)
+            price = soup.select('span[itemprop=price]')[0].getText()
+            data['price'] = self._helper.extract_int(price)
 
-        data['descr'] = str(soup.select('.card-details-text-shadow')[0])
+            data['descr'] = str(soup.select('.card-details-text')[0])
+        except IndexError:
+            return None
 
         return data
 
