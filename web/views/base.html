@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% include "blocks/_staticCssInclude.html" %}
+    <style>
+        .no-padding {
+            padding: 0;
+        }
+
+        .app-navbar {
+            border-radius: 0;
+        }
+
+        .app-container {
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            min-height: 1000px;
+            margin-top: -20px;
+            padding: 20px 20px;
+        }
+
+        .app-img-cover {
+            display: inline-block;
+            width: 100%;
+        }
+
+        .app-invisible {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- navbar -->
+    {% block navbar %}
+        <nav class="navbar navbar-inverse app-navbar">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Inspect Avto</a>
+                </div>
+
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ user.username }}<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/auth/logout">Выйти</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li>
+                        <div class="app-invisible js-fetch-avto-progress-bar">
+                            <div style="width: 250px; height: 20px; padding-right: 50px; padding-top: 5px; margin-top: 10px;">
+                                <div class="progress">
+                                      <div class="progress-bar progress-bar-success progress-bar-striped active"
+                                           role="progressbar"
+                                           aria-valuenow="99"
+                                           aria-valuemin="0"
+                                           aria-valuemax="100"
+                                           style="width: 100%"
+                                      >
+                                            <span class="sr-only">40% Complete (success)</span>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div style="height: 20px; padding-right: 50px; margin-top: 10px;">
+                            <a href="#" class="btn btn-success js-fetch-site-data">Получить данные</a>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+        </nav>
+    {% endblock %}
+    <!-- end navbar -->
+
+    <!-- content -->
+    {% block content %}{% endblock %}
+    <!-- end content -->
+
+{% include "blocks/_staticJsInclude.html" %}
+</body>
+</html>

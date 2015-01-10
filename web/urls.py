@@ -3,14 +3,18 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from web.controllers.index import index
+from web.controllers import auth
+from web.controllers import avto_fetch
 
 
-urlpatterns = patterns('',
+urlpatterns = patterns(''
     # Examples:
     # url(r'^$', 'web.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^$', index),
+    , url(r'^admin/', include(admin.site.urls))
+    , url(r'^$', index)
+    , url(r'^auth/login', auth.login)
+    , url(r'^auth/logout', auth.logout)
 
-    url(r'^admin/', include(admin.site.urls)),
-    #patterns('django.contrib.staticfiles.views', url(r'^s/(?P<path>.*)$', 'serve'),)
+    , url(r'^fetch-avto$', avto_fetch.index)
 )

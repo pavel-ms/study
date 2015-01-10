@@ -24,12 +24,17 @@ module.exports = function(grunt) {
                     'bower_components/jquery/dist/jquery.js'
                     , 'bower_components/underscore/underscore.js'
                     , 'bower_components/bootstrap/dist/js/bootstrap.js'
+
+                    , 'js/app.js'
                 ],
                 dest: 'build/main.js'
             }
         },
         // сжатие js
         uglify: {
+            options: {
+                beautify: true // ТОЛЬКО ДЛЯ DEBUG
+            },
             prod: {
                 files: destJs
             }
@@ -67,8 +72,21 @@ module.exports = function(grunt) {
 				src:[
 					'../static/css/*.css'
 					, '../static/js/*.js'
+					//, '../static/fonts/*'
 				]
 			}
+        },
+
+        copy: {
+            main: {
+                files: [{
+                    expand: true,
+                    src: ['**'],
+                    dest: '../static/fonts/',
+                    filter: 'isFile',
+                    cwd: 'bower_components/font-awesome/fonts/'
+                }]
+            }
         }
     });
 
@@ -77,7 +95,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     // просто по вводу grunt в командную строку
-    grunt.registerTask('default', ['concat', 'clean:prod', 'uglify:prod', 'less:prod', 'replace:prod']);
+    grunt.registerTask('default', ['concat', 'clean:prod', 'uglify:prod', 'less:prod', 'replace:prod', 'copy']);
 };

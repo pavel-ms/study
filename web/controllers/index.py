@@ -1,8 +1,10 @@
-from django.http import HttpResponse
-from django.template.loader import get_template
-from django.template import Context
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+
+from web.models import Car
 
 
+@login_required(login_url='/auth/login')
 def index(req):
-    t = get_template('index.html')
-    return HttpResponse(t.render(Context()))
+    cars = Car.objects.all()
+    return render(req, 'index.html', {"cars": cars})

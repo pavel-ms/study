@@ -1,11 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>it is test</title>
-    {% include "blocks/_staticCssInclude.html" %}
-</head>
-<body>
-    <h1>It works</h1>
-    {% include "blocks/_staticJsInclude.html" %}
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Inspect Avto{% endblock %}
+
+{% block content %}
+
+    <div class="container app-container">
+        <div class="row">
+            <div class="col-md-12">
+
+                {% for c in cars %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2>{{ c.model }}</h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img class="app-img-cover" src="{{ c.cover }}">
+                        </div>
+                        <div class="col-md-8">
+                            <h4>{{ c.model }} с сайта auto.ru</h4>
+                            <div>
+                                {{ c.descr|safe }}
+                            </div>
+                            <div>
+                                <h2>{{ c.price }} <i class="fa fa-rub">&nbsp;</i></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
