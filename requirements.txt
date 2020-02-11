@@ -1,4 +1,4 @@
-Django==1.7.2
+Django==1.11.28
 beautifulsoup4==4.3.2
 certifi==14.05.14
 chardet==2.0.1
